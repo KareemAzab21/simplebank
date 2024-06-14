@@ -4,7 +4,7 @@ network:
 	docker network create bank-network
 
 postgres:
-	docker run --name postgres --network bank-network -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:14-alpine
+	docker run --name postgres --network bank-network -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:16-alpine
 
 mysql:
 	docker run --name mysql8 -p 3306:3306  -e MYSQL_ROOT_PASSWORD=secret -d mysql:8
@@ -46,8 +46,8 @@ server:
 	go run main.go
 
 mock:
-	mockgen -package mockdb -destination db/mock/store.go github.com/techschool/simplebank/db/sqlc Store
-	mockgen -package mockwk -destination worker/mock/distributor.go github.com/techschool/simplebank/worker TaskDistributor
+	mockgen -package mockdb -destination db/mock/store.go github.com/KareemAzab21/simplebank/db/sqlc Store
+	mockgen -package mockwk -destination worker/mock/distributor.go github.com/KareemAzab21/simplebank/worker TaskDistributor
 
 proto:
 	rm -f pb/*.go
